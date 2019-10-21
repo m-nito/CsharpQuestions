@@ -28,13 +28,15 @@ namespace CSharpTraining
             /// </summary>
             public int PastPurchaseCount;
         }
+
         /// <summary>
-        /// ユーザ情報を受け取り、おすすめ商品を判定して返します。
+        /// 回答用メソッド
         /// </summary>
         /// <param name="userInfo">ユーザ情報</param>
         /// <returns>おすすめしたい商品のID</returns>
-        public int Recommend(UserInfo userInfo)
+        public static int Recommend(UserInfo userInfo)
         {
+            // 実装を行う
             return -1;
         }
     }

@@ -32,8 +32,15 @@
                 this.CriticalChance = c;
             }
         }
+        /// <summary>
+        /// 回答用メソッド
+        /// </summary>
+        /// <param name="chance"></param>
+        /// <param name="atk"></param>
+        /// <returns></returns>
         public HitResult GetHitResult(byte chance, AttackInfo atk)
         {
+            // 実装を行う
             return HitResult.Error;
         }
     }

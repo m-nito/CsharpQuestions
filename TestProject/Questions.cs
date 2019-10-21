@@ -24,7 +24,6 @@ namespace TestProject
     {
         /// <summary>
         /// - Saved by the bell -
-        /// 
         /// あなたは学習サイトの成績評価機能の実装を任されました。
         /// 
         /// 与えられる条件は以下の通りです。
@@ -42,17 +41,12 @@ namespace TestProject
         {
             var datas = Datastore.Datas[2] as int[];
             var grades = new Answer1().ScoresToGrades(datas);
-            var answers = Datastore.Datas[1] as char[];
-            foreach (var ans in grades)
-            {
-                var expected = answers[Array.IndexOf(grades.ToArray(), ans)];
-                Assert.AreEqual(expected, ans);
-            }
+            var expectations = Datastore.Datas[1] as char[];
+            foreach (var ans in grades) Assert.AreEqual(expectations[Array.IndexOf(grades.ToArray(), ans)], ans);
         }
 
         /// <summary>
-        /// - You shall not pass -
-        /// 
+        /// - You shall not path -
         /// あなたは中小企業の情報システム担当者です。
         /// 現在、情報システム部が統括している社内アプリケーションについて、
         /// 一時保持ファイルを誤って社内NASであるN:ドライブに保存してしまうミスが多く問題になっています。
@@ -84,12 +78,11 @@ namespace TestProject
             }
         }
         /// <summary>
-        /// - We (don't) know who you are -
-        /// 
+        /// - Patronizing -
         /// あなたはアパレル企業の新人社内エンジニアです。
         /// 最初の仕事として、ユーザへのおすすめ商品を表示する機能の実装を依頼されました。
         /// 類似したユーザに人気のある商品を紹介するようなきちんとしたレコメンドエンジンを作成する予算はないので、
-        /// 簡単なチェックを行い、ユーザ属性に応じてこちらが売りたい商品を表示する機能としてほしい、とのことです。
+        /// 簡単なチェックを行い、ユーザ属性に応じてこちらが売りたい商品を決め打ちで表示する機能としてほしい、とのことです。
         /// 非常に残念なオーダーな気がしましたが、郷に入っては郷に従えということで粛々と機能追加を行いましょう。
         /// 
         /// 以下の条件が与えられます。
@@ -98,7 +91,7 @@ namespace TestProject
         /// 3. ユーザ情報は、「年齢」、「性別」、「過去一年間の購買数」を持ちます。
         /// 4. Recommend()は、与えられたユーザ情報に応じて、紹介したい商品のIDを整数で返します。
         /// 
-        /// Answer3.csにおいて以下の要件を満たしてください。
+        /// Answer3.csにおいて以下の要件を満たすRecommend()メソッドを実装してください。
         /// 1. ユーザが男性であるなら、127442 を返します。
         /// 2. ユーザが女性であり、30歳未満であるなら 284522 を返します。
         /// 3. ユーザが女性であり、30歳以上であるなら、292774 を返します。
@@ -109,11 +102,14 @@ namespace TestProject
         [Test]
         public void Question3()
         {
-            
+            var datas = Datastore.Datas[7] as Answer3.UserInfo[];
+            foreach (var d in datas)
+            {
+                Assert.AreEqual(0, Answer3.Recommend(d));
+            }
         }
         /// <summary>
-        /// - Dancing in the rain -
-        /// 
+        /// - Singing in the rain -
         /// あなたはオープンして半年のタピオカミルクティーチェーンから、
         /// 彼らが利用するソフトウェアへの機能追加を依頼されました。
         /// 売上の確認用ツールにおいて、以下を表示できるようにしたいとのことです。
@@ -132,19 +128,30 @@ namespace TestProject
         /// Answer4.csにおいて以下の要件を満たしてください。
         /// 1. GetCustomerCountByWeather()を実装します。
         /// 1-A. この機能は、すべての期間の売り上げデータを精査して、天気ごとの来客数(＝売上記録の数)の平均を返します。
+        /// 1-B. 第一引数に調べたい天気、第二引数に売り上げ記録が渡されます。
         /// 2. GetBusiestHour()を実装します。
         /// 2-A. この機能は、すべての期間について、最も来客数が多い時間帯を返します。
         /// 3. GetMostProfitableDay()を実装します。
-        /// 3-A. この機能は、すべての期間について、最も売り上げの金額が多い日にちを返します。
+        /// 3-A. この機能は、すべての期間について、年月を問わず最も売り上げの金額が多い日にちを返します。
         /// </summary>
         [Test]
         public void Question4()
         {
-
+            var datas = Datastore.Datas[7] as Answer4.Record[];
+            Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Sunny, datas), 1);
+            Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Cloudy, datas), 1);
+            Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Rain, datas), 1);
+            Assert.AreEqual(Answer4.GetBusiestHour(datas), 1);
+            Assert.AreEqual(Answer4.GetMostProfitableDay(datas), 1);
         }
+
         /// <summary>
         /// - Test your luck -
+        /// あなたは来年発売予定のゲームの開発チームにアサインされました。
+        /// 最初の仕事として、戦闘処理の攻撃命中判定の実装を依頼されました。
+        /// 判定結果として返してほしい情報の詳細も受け取っています。
         /// 
+        /// 以下の条件が与えられます。
         /// 1. 第一引数には、ランダムな整数が0-100の区間で渡されます。
         /// 2. 第二引数には、キャラクターの攻撃情報が渡されます。
         /// 2-A. 攻撃情報は、命中率HitChanceを持ちます。
@@ -159,7 +166,7 @@ namespace TestProject
         [Test]
         public void Question5()
         {
-            Dictionary<Answer5.AttackInfo, byte> datas = new Dictionary<Answer5.AttackInfo, byte>();
+            var datas = Datastore.Datas[6] as Dictionary<Answer5.AttackInfo, byte>;
             foreach (var kvp in datas)
             {
                 var result = new Answer5().GetHitResult(kvp.Value, kvp.Key);
@@ -171,9 +178,9 @@ namespace TestProject
         /// <summary>
         /// - Shenzhen I.O. -
         /// あなたは警備ソリューションを販売する中小企業から依頼を受けました。
-        /// 彼らは防犯のため監視カメラを設置しようとしていますが、
+        /// 彼らは防犯のため監視カメラを設置していますが、
         /// 本物の監視カメラの一部にダミーのカメラを混入させることでコストカットを行いたいと考えています。
-        /// 本物のカメラは通電状態であるなら5秒間隔でLEDが点灯するのですが、
+        /// 本物のカメラは通電状態であるなら5秒間隔でLEDが点灯するので、
         /// ダミーのカメラにはLED点灯機能だけを持つ簡易基盤を搭載しました。
         /// あなたは、その簡易基盤が本物と（見た目上）同様に振る舞うようなプログラムを作成する必要があります。
         /// 
@@ -187,13 +194,13 @@ namespace TestProject
         /// 2. ライト機能が満たすべき要件は、以下の通りです。
         /// 2-A. 5秒に一回trueを返すことで、LEDライトを点灯させるChangeLight()メソッドを実装します。
         /// 2-B. 最初は消灯状態から開始し、5秒目のみライトが点灯し、6秒目には消灯させる必要があります。
-        /// 2-C. 同様に9秒目で消灯していたライトが10秒目には点灯し、11秒目には消灯している...といった動作を60秒間隔で行います。
+        /// 2-C. 同様に9秒目で消灯していたライトが10秒目には点灯し、11秒目には消灯している...といった動作を以降同様に行います。
         /// </summary>
         [Test]
         public void Question6()
         {
             ILight ans = new Answer6();
-            for (int i = 1; i < 999; i++)
+            for (int i = 1; i < 500000; i++)
             {
                 var ret = ans.ChangeLight();
                 if (i % 5 == 0) Assert.IsTrue(ret);
@@ -202,6 +209,7 @@ namespace TestProject
         }
 
         /// <summary>
+        /// - Who's there? -
         /// あなたは現在開発中のWebアプリケーションのクエリ文作成処理を依頼されました。
         /// MySQLデータベースから実際のデータを抽出したり、画面に表示する機能は他の担当者が現在作成中です。
         /// クエリ文は文字列の形でハンドルされ、クエリ処理ライブラリが通信処理を行います。
@@ -210,7 +218,8 @@ namespace TestProject
         /// 
         /// 以下の条件が与えられます。
         /// 1. GetQueryString()メソッドにはユーザIDを示す整数が渡されます。
-        /// 以下の要件を満たすGetQueryString()メソッドを実装してください。
+        /// 
+        /// 以下の要件を満たすGetQueryString()メソッドをAnswer7.csに実装してください。
         /// 1. 与えられたユーザIDに応じてユーザを選択するクエリ文を文字列として生成し返します。
         /// 1-A. e.g. 与えられたユーザIDが10であるなら"SELECT * FROM users WHERE id = 10;"を返す。
         /// 1-B. e.g. 与えられたユーザIDが259であるなら"SELECT * FROM users WHERE id = 259;"を返す。
@@ -221,17 +230,8 @@ namespace TestProject
         public void Question7()
         {
             var ans = new Answer7();
-            string[] expectations = new string[] { };
-            for (int i = 0; i < 999; i++)
-            {
-                var actual = ans.GetQueryString(i);
-                if (i == 0)
-                {
-                    Assert.AreEqual(expectations[0], actual);
-                    continue;
-                }
-                Assert.AreEqual(expectations[1], actual);
-            }
+            var datas = Datastore.Datas[4] as int[];
+            foreach (var i in datas) Assert.AreEqual((Datastore.Datas[5] as string[])[Array.IndexOf(datas.ToArray(), i)]?.ToLower(), ans.GetQueryString(i)?.ToLower());
         }
     }
 }
