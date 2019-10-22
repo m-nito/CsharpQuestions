@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datastore.cs" />
+    <Compile Include="Datastores\Datastore.cs" />
     <Compile Include="Questions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

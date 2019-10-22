@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CSharpTraining;
 
-namespace TestProject
+namespace TestProject.Datastores
 {
     public static class Datastore
     {
