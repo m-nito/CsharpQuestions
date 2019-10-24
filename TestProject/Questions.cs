@@ -72,12 +72,7 @@ namespace TestProject
         {
             var datas = Datastore.Datas[3] as List<string>;
             var expectations = (bool[])Datastore.Datas[0];
-            foreach (var d in datas)
-            {
-                var result = new Answer2().CheckDrive(d);
-                var expected = expectations[datas.IndexOf(d)];
-                Assert.AreEqual(expected, result);
-            }
+            foreach (var d in datas) Assert.AreEqual(expectations[datas.IndexOf(d)], new Answer2().CheckDrive(d));
         }
         /// <summary>
         /// - Patronizing -
@@ -100,15 +95,15 @@ namespace TestProject
         /// 4. ユーザが男性であり、過去一年間に一個でも商品を購入したことがあるなら、114596 を返します。
         /// 5. ユーザが女性であり、過去一年間の購買数が10以上であるなら、478256 を返します。
         /// 6. 上記の条件は、下に行くほど優先度が高くなります。
+        /// 
+        /// TIPS:「以上」「以下」「未満」については発言者に意味合いを確認した方がよいことが多いですが、
+        ///   ここでは原則通りの意味として、「以下」で<=に「未満」で<に、それぞれ対応するものとします。
         /// </summary>
         [Test]
         public void Question3()
         {
-            var datas = Datastore.Datas[7] as Answer3.UserInfo[];
-            foreach (var d in datas)
-            {
-                Assert.AreEqual(0, Answer3.Recommend(d));
-            }
+            var datas = Datastore.Datas[8] as Answer3.UserInfo[];
+            foreach (var d in datas) Assert.AreEqual(((int[])Datastore.Datas[10])[datas.ToList().IndexOf(d)], Answer3.Recommend(d));
         }
         /// <summary>
         /// - Singing in the rain -
@@ -139,7 +134,7 @@ namespace TestProject
         [Test]
         public void Question4()
         {
-            var datas = Datastore.Datas[7] as Answer4.Record[];
+            var datas = Datastore.Datas[9] as Answer4.Record[];
             Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Sunny, datas), 1);
             Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Cloudy, datas), 1);
             Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Rain, datas), 1);
