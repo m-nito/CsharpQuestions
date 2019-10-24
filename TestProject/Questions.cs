@@ -124,22 +124,22 @@ namespace TestProject
         /// 
         /// Answer4.csにおいて以下の要件を満たしてください。
         /// 1. GetCustomerCountByWeather()を実装します。
-        /// 1-A. この機能は、すべての期間の売り上げデータを精査して、天気ごとの来客数(＝売上記録の数)の平均を返します。
+        /// 1-A. この機能は、すべての期間の売り上げデータを精査して、天気ごとの一日あたり来客数(＝売上記録の数)の平均を返します。
         /// 1-B. 第一引数に調べたい天気、第二引数に売り上げ記録が渡されます。
         /// 2. GetBusiestHour()を実装します。
         /// 2-A. この機能は、すべての期間について、最も来客数が多い時間帯を返します。
         /// 3. GetMostProfitableDay()を実装します。
-        /// 3-A. この機能は、すべての期間について、年月を問わず最も売り上げの金額が多い日にちを返します。
+        /// 3-A. この機能は、すべての期間について、最も売り上げの金額が多い日にちを返します。
         /// </summary>
         [Test]
         public void Question4()
         {
             var datas = Datastore.Datas[9] as Answer4.Record[];
-            Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Sunny, datas), 1);
-            Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Cloudy, datas), 1);
-            Assert.AreEqual(Answer4.GetCustomersByWeather(Answer4.Weather.Rain, datas), 1);
-            Assert.AreEqual(Answer4.GetBusiestHour(datas), 1);
-            Assert.AreEqual(Answer4.GetMostProfitableDay(datas), 1);
+            Assert.AreEqual(Answer4.GetCustomerCountByWeather(Answer4.Weather.Sunny, datas), (Datastore.Datas[11] as int[])[0]);
+            Assert.AreEqual(Answer4.GetCustomerCountByWeather(Answer4.Weather.Cloudy, datas), (Datastore.Datas[11] as int[])[1]);
+            Assert.AreEqual(Answer4.GetCustomerCountByWeather(Answer4.Weather.Rain, datas), (Datastore.Datas[11] as int[])[2]);
+            Assert.AreEqual(Answer4.GetBusiestHour(datas), (Datastore.Datas[11] as int[])[3]);
+            Assert.AreEqual(Answer4.GetMostProfitableDay(datas), (Datastore.Datas[11] as int[])[4]);
         }
 
         /// <summary>
