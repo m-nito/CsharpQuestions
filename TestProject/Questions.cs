@@ -13,7 +13,8 @@ namespace TestProject
     /// NUnitテストコードです。
     /// ここには問題が定義されており、CSharpTraining.AnswersN.csファイルへ正しく回答を行うと、
     /// VisualStudioテストエクスプローラでテストを実行した際グリーンが点灯するようになります。
-    /// このファイルのコードは編集せず、回答のための編集はAnswerN.csファイルに行ってください。
+    /// このファイルのコードは、回答結果が正しいか判定する処理であるため編集はせず、
+    /// 回答のための編集はAnswerN.csファイルに行ってください。
     /// 
     /// ・問題の詳細はそれぞれのテストの概要に記載してあります。
     /// ・業務プログラミングにありがちなシナリオを元にしているので、
@@ -171,7 +172,7 @@ namespace TestProject
             foreach (var kvp in datas)
             {
                 var result = new Answer5().GetHitResult(kvp.Value, kvp.Key);
-                var expected = Answer5.HitResult.Error;
+                var expected = ((Answer5.HitResult[])Datastore.Datas[7])[datas.Keys.ToList().IndexOf(kvp.Key)];
                 Assert.AreEqual(expected, result);
             }
         }
